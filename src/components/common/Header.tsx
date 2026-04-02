@@ -1,38 +1,22 @@
-import React from 'react'
 import { styled } from 'styled-components'
 import { FaSignInAlt, FaRegUser } from 'react-icons/fa';
-
-const CATEGORY = [
-  {
-    id: null,
-    name: "전체",
-  },
-  {
-    id: 0,
-    name: "동화",
-  },
-  {
-    id: 1,
-    name: "소설",
-  },
-  {
-    id: 2,
-    name: "사회",
-  },
-]
+import { Link } from 'react-router-dom';
+import { useCategory } from '../../hooks/useCategory';
 
 const Header = () => {
+  const { category } = useCategory();
+
   return (
     <HeaderStyle>
-      <h1>book store</h1>
+      <h1><Link to="/">book store</Link></h1>
       <nav className='category'>
         <ul>
           {
-            CATEGORY.map((item) => (
+            category.map((item) => (
               <li key={item.id}>
-                <a href={item.id === null ? '/books' : `/books?category_id=${item.id}`}>
-                  {item.name}
-                </a>
+                <Link to={item.id === null ? '/books' : `/books?category_id=${item.id}`}>
+                  {item.category_name}
+                </Link>
               </li>
             ))
           }
@@ -66,6 +50,11 @@ const HeaderStyle = styled.header`
   padding: 20px 0;
   border-bottom: 1px solid ${({ theme }) => theme.color.background};
 
+  h1 a{
+    text-decoration: none;
+    color: ${({ theme }) => theme.color.text};
+  }
+
   .category {
     ul {
       display: flex;
@@ -97,6 +86,7 @@ const HeaderStyle = styled.header`
           font-size: 1rem;
           font-weight: 600;
           text-decoration: none;
+          color: ${({ theme }) => theme.color.text};
           display: flex;
           align-items: center;
         }
