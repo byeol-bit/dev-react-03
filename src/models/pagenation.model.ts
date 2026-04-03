@@ -1,4 +1,4 @@
 export interface Pagenation {
   currentPage: number;
-  totalCount: number;
+  bookCount: number;
 }

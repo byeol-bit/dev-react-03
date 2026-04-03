@@ -28,6 +28,7 @@ border-radius: ${({ theme }) => theme.borderRadius.default};
 font-size: 1rem;
 line-height: 1.5;
 color: ${({ theme }) => theme.color.text};
+box-sizing: border-box;
 `;
 
 export default InputText

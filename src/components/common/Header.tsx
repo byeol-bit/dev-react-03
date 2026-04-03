@@ -2,9 +2,11 @@ import { styled } from 'styled-components'
 import { FaSignInAlt, FaRegUser } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useCategory } from '../../hooks/useCategory';
+import { useAuthStore } from '../../store/authStore';
 
 const Header = () => {
   const { category } = useCategory();
+  const { isLoggedIn, storeLogout } = useAuthStore();
 
   return (
     <HeaderStyle>
@@ -23,18 +25,32 @@ const Header = () => {
         </ul>
       </nav>
       <nav className='auth'>
-        <ul>
-          <li>
-            <a href="/login">
-              <FaSignInAlt />로그인
-            </a>
-          </li>
-          <li>
-            <a href="/join">
-              <FaRegUser />회원가입
-            </a>
-          </li>
-        </ul>
+        {
+          isLoggedIn && (
+            <ul>
+              <li><Link to='/cart'>장바구니</Link></li>
+              <li><Link to='/orderlist'>장바구니</Link></li>
+              <li><button onClick={storeLogout}>로그아웃</button></li>
+            </ul>
+          )
+        }
+        {
+          !isLoggedIn && (
+            <ul>
+              <li>
+                <a href="/login">
+                  <FaSignInAlt />로그인
+                </a>
+              </li>
+              <li>
+                <a href="/join">
+                  <FaRegUser />회원가입
+                </a>
+              </li>
+            </ul>
+          )
+        }
+
       </nav>
     </HeaderStyle>
   )
@@ -81,14 +97,17 @@ const HeaderStyle = styled.header`
       gap: 16px;
       list-style: none;
       li {
-        a {
-          gap: 4px;
+        a, button {
+          line-height: 1;
           font-size: 1rem;
           font-weight: 600;
           text-decoration: none;
           color: ${({ theme }) => theme.color.text};
           display: flex;
           align-items: center;
+          background: none;
+          border: 0;
+          cursor: pointer;
         }
       }
       
