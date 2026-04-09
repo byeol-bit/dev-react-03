@@ -10,10 +10,17 @@ export const createClient = (config?: AxiosRequestConfig) => {
     timeout: DEFAULT_TIMEOUT,
     headers: {
       "content-type": "application/json",
-      Authorization: getToken() ? getToken() : "",
     },
     withCredentials: true,
     ...config,
+  });
+
+  axiosInstance.interceptors.request.use((requestConfig) => {
+    const token = getToken();
+    if (token) {
+      requestConfig.headers.Authorization = token;
+    }
+    return requestConfig;
   });
 
   axiosInstance.interceptors.response.use(

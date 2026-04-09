@@ -17,6 +17,8 @@ export const resetPassword = async (userData: ISignupProps) => {
 
 interface ILoginResponse {
   token: string;
+  /** 로그인 직후부터 만료까지 남은 시간(초) */
+  expiresIn: number;
 }
 export const login = async (userData: ISignupProps) => {
   const response = await httpClient.post<ILoginResponse>(

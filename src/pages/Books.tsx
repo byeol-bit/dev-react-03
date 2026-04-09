@@ -7,11 +7,20 @@ import BooksEmpty from '../components/books/BooksEmpty'
 import Pagenation from '../components/books/Pagenation'
 import BooksViewSwitcher from '../components/books/BooksViewSwitcher'
 import { useBooks } from '../hooks/useBooks'
+import Loading from '../components/common/Loading'
 
 const Books = () => {
-  const { books, pagenation, isEmpty } = useBooks();
+  const { books, pagenation, isEmpty, isBooksLoading } = useBooks();
   console.log('books', books);
   console.log('pagenation', pagenation);
+
+  if (isEmpty) {
+    return <BooksEmpty />
+  }
+
+  if (!books || !pagenation || isBooksLoading) {
+    return <Loading />
+  }
 
   return (
     <>
@@ -22,13 +31,10 @@ const Books = () => {
           <BooksFilter />
           <BooksViewSwitcher />
         </div>
-
         {/* 목록 */}
-        {!isEmpty && <BooksList books={books} />}
-        {/* empty */}
-        {isEmpty && <BooksEmpty />}
+        <BooksList books={books} />
         {/* 페이지네이션 */}
-        {!isEmpty && <Pagenation pagenation={pagenation} />}
+        <Pagenation pagenation={pagenation} />
 
       </BookStyle>
     </>

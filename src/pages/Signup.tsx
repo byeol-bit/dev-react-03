@@ -1,12 +1,10 @@
-import React, { useState } from 'react'
 import Title from '../components/common/Title'
 import InputText from '../components/common/InputText'
 import Button from '../components/common/Button'
 import styled from 'styled-components'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { fetchSignup } from '../api/auth.api'
-import { useAlert } from '../hooks/useAlert'
+import { useAuth } from '../hooks/useAuth'
 
 export interface ISignupProps {
   email: string;
@@ -14,14 +12,9 @@ export interface ISignupProps {
 }
 
 const Signup = () => {
-  const navigate = useNavigate();
-  const showAlert = useAlert();
-
+  const { userSignup } = useAuth();
   const obSubmit = (data: ISignupProps) => {
-    fetchSignup(data).then((res) => {
-      showAlert('회원가입이 완료되었습니다.');
-      navigate('/login');
-    });
+    userSignup(data);
   }
 
   const { register,
