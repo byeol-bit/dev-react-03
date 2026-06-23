@@ -116,7 +116,7 @@ export const dark: Theme = {
     secondary: "blue",
     third: "green",
     border: "grey",
-    text: "black",
+    text: "gray",
   },
   heading: {
     large: {

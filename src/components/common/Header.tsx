@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 import { FaSignInAlt, FaRegUser, FaUserCircle } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCategory } from '../../hooks/useCategory';
 import { useAuthStore } from '../../store/authStore';
 import Dropdown from './Dropdown';
@@ -9,6 +9,12 @@ import ThemeSwitcher from '../header/ThemeSwitcher';
 const Header = () => {
   const { category } = useCategory();
   const { isLoggedIn, storeLogout } = useAuthStore();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    storeLogout();
+    navigate("/");
+  };
 
   return (
     <HeaderStyle>
@@ -34,7 +40,7 @@ const Header = () => {
                 <ul>
                   <li><Link to='/cart'>장바구니</Link></li>
                   <li><Link to='/orderlist'>주문목록</Link></li>
-                  <li><button onClick={storeLogout}>로그아웃</button></li>
+                  <li><button onClick={handleLogout}>로그아웃</button></li>
                 </ul>
               )
             }

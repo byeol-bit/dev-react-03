@@ -65,7 +65,7 @@ const DropdownStyled = styled.div<IDropdownStyleProps>`
     top: 40px;
     right: 0;
     padding: 16px;
-    background: $fff;
+    background: ${({ theme }) => theme.name === "light" ? "#fff" : "#111"};
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
     border-radius: ${({ theme }) => theme.borderRadius.default};
     z-index: 1000;

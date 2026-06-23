@@ -50,11 +50,11 @@ const Login = () => {
               scheme='primary'
               type='submit'
             >
-              회원가입
+              로그인
             </Button>
           </fieldset>
           <div className='info'>
-            <Link to="/reset">로그인</Link>
+            <Link to="/reset">비밀번호 초기화</Link>
           </div>
         </form>
       </SignupStyle>

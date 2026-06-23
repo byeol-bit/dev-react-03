@@ -1,7 +1,7 @@
 import Home from './pages/Home';
 import Layout from './components/layout/Layout';
 import { BookStoreThemeProvider } from './context/themeContext';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 import Error from './components/common/Error';
 import Signup from './pages/Signup';
 import ResetPassword from './pages/ResetPassword';
@@ -18,7 +18,8 @@ import ToastContainer from './components/common/toast/ToastContainer';
 const routeList = [
   {
     path: "/",
-    element: <Layout><Home /></Layout>,
+    // element: <Layout><Home /></Layout>,
+    element: <Navigate to="/books" replace />,
   },
   {
     path: "/books",
@@ -37,7 +38,7 @@ const routeList = [
     element: <Layout><OrderList /></Layout>
   },
   {
-    path: "/signup",
+    path: "/join",
     element: <Layout><Signup /></Layout>
   },
   {

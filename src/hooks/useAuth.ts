@@ -29,13 +29,11 @@ export const useAuth = () => {
   };
 
   const userSignup = (data: ISignupProps) => {
-    fetchSignup(data).then((res) => {
-      storeLogin(res.token, res.expiresIn);
-
-      showAlert("회원가입 완료되었습니다.");
-      navigate("/");
-    });
-  };
+  fetchSignup(data).then(() => {
+    showAlert("회원가입 완료되었습니다. 로그인해 주세요.");
+    navigate("/login");
+  });
+};
 
   const userResetPassword = (data: ISignupProps) => {
     resetPassword(data).then(() => {
